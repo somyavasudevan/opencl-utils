@@ -1,12 +1,15 @@
 #!/usr/bin/perl -w
 use strict;
 
-open(CL, '<../include/CL/cl.h') or die "Can't open cl.h";
-open(CLGL, '<../include/CL/cl_gl.h') or die "Can't open cl_gl.h"; 
+
+my $filename = shift;
+
+open(CL, "<$filename") or die "Can't open cl.h";
 
 my ($ret, $func, $args);
 
-print "#include \"dynamiclib.h\"\n\n\n";
+print "#include \"dynamiclib.h\"\n";
+print "#include \"$filename\"\n\n\n";
 
 while(<CL>) {
 	chomp;
@@ -39,7 +42,6 @@ while(<CL>) {
 }
 
 close(CL);
-close(CLGL);
 
 sub inside_function {
 	my $funcRet = shift;
