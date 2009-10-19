@@ -27,7 +27,7 @@
 #define __OPENCL_CL_GL_H
 
 #ifdef __APPLE__
-#include "cl_platform.h"
+#include <OpenCL/cl_platform.h>
 #include <OpenGL/gl.h>
 #else
 #include "cl_platform.h"

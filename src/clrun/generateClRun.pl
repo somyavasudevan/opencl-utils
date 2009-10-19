@@ -49,7 +49,7 @@ sub inside_function {
 	my $funcArgsType = shift;
 	my $funcArgsName = shift;
 
-	print "\tstatic ($funcRet)(*func)($funcArgsType) = NULL;\n";
+	print "\tstatic $funcRet (*func)($funcArgsType) = NULL;\n";
 	print "\tif(!func) func = getFunction(\"$funcName\");\n";
-	print "\t(*func)($funcArgsName);\n";
+	print "\treturn (*func)($funcArgsName);\n";
 }
