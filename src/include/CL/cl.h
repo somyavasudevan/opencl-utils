@@ -594,8 +594,8 @@ extern CL_API_ENTRY cl_int CL_API_CALL
 clBuildProgram(cl_program           /* program */,
                cl_uint              /* num_devices */,
                const cl_device_id * /* device_list */,
-               const char *         /* options */, 
-               void (*pfn_notify)(cl_program /* program */, void * /* user_data */),
+               const char *         /* options */,
+			   void (*pfn_notify)(const char *, const void *, size_t, void *) /* pfn_notify */,
                void *               /* user_data */) CL_API_SUFFIX__VERSION_1_0;
 
 extern CL_API_ENTRY cl_int CL_API_CALL
