@@ -37,7 +37,6 @@ int clrHasOpenCL() {
 
 
 // Windows-specific DLL code
-// Standard crap to make wxWidgets happy
 #ifdef _WIN32
 HINSTANCE g_hInstance;
 
