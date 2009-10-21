@@ -24,7 +24,7 @@ int loadLib(const char *filename) {
 	if (!library)
 		return -3;
 
-	return 1;
+	return 0;
 }
 
 int unloadLib()
@@ -36,7 +36,7 @@ int unloadLib()
 #ifdef _WIN32
     retval = FreeLibrary(library);
 #else
-    retval = dlclose(library)?0:1;
+    retval = dlclose(library);
 #endif
 
     library = NULL;

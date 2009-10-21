@@ -76,11 +76,12 @@ while(<CL>) {
           $funcArgsTypes = "void";
         }
 
+	my $func = "${funcName}_ptr";
 	$args =~ s$(/\*|\*/)$$g; # uncomment names
+	print "static $funcRet (*$func)($funcArgsTypes) = NULL;\n";
  	print "$funcRet $funcName ($funcArgSig) {\n";
-	print "\tstatic $funcRet (*func)($funcArgsTypes) = NULL;\n";
-	print "\tif(!func) func = getFunction(\"$funcName\");\n";
-	print "\treturn (*func)($funcArgsNames);\n";
+	print "\tif(!$func) $func = getFunction(\"$funcName\");\n";
+	print "\treturn (*$func)($funcArgsNames);\n";
  	print "}\n\n";
 }
 
