@@ -30,6 +30,7 @@
 #include <OpenCL/cl_platform.h>
 #include <OpenGL/gl.h>
 #else
+#include "cl.h"
 #include "cl_platform.h"
 #include <GL/gl.h>
 #endif	

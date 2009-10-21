@@ -16,6 +16,7 @@ while(<CL>) {
 	next unless $_ =~ /CL_API_ENTRY\s*(.*)\s*CL_API_CALL/;
 	$funcRet = $1;
 	my $fa = "";
+        my $noArgs = 0;
 	while(<CL>) {
 		$fa .= $_;
 		last if $_ =~ /;$/;
@@ -29,7 +30,7 @@ while(<CL>) {
 	
 	# split params by , (ignoring function pointers)
 	(my @args) = $args =~  m/([^(,]*(?:\([^)]+\)[^(),]*)*[^),]*),?/g;
-
+        
 	my (@argsTypes, @argsNames);
 
 	my $funcArgSig = "";
@@ -38,9 +39,13 @@ while(<CL>) {
 		
 		next if ($arg eq "");
 		my ($type, $name) = $arg =~ m|\s*(.*)\s*/\*\s*(.*)\s*\*/|s;
+               
+                # Strip []
+                if(defined $name) {
+                	$name =~ s/\[.*\]//g;
+                }
 
-
-		if ($arg =~ /,/) {
+		if ($arg =~ /\(.*\)/) {
 			$tmp = $type;
 			$type =~ s/\(\*.*?\)/\(\*\)/g 
 		}
@@ -48,17 +53,28 @@ while(<CL>) {
 		push @argsTypes, $type;
 		push @argsNames, $name;
 
-		if ($arg =~ /,/) {
+		if ($arg =~ /\(.*\)/) {
 			$funcArgSig .= "$tmp,";
-		} else {
+		} elsif(defined $type) {
 			$funcArgSig .= "$type $name,";
-		}
+		} else { # Functions with no arguments (i.e. "void" only)
+                	$funcArgSig = "void,";
+                        $noArgs = 1;
+                        last;
+                }
 	}
 
 	chop($funcArgSig); #last ,
 
-	my $funcArgsNames = ($#argsNames != -1)? join ', ',@argsNames : "";
-	my $funcArgsTypes = ($#argsTypes != -1)? join ', ',@argsTypes : "";
+        my ($funcArgsNames, $funcArgsTypes);
+
+        if($noArgs eq 0) {
+          $funcArgsNames = ($#argsNames != -1)? join ', ',@argsNames : "";
+          $funcArgsTypes = ($#argsTypes != -1)? join ', ',@argsTypes : "";
+        } else {
+          $funcArgsNames = "";
+          $funcArgsTypes = "void";
+        }
 
 	$args =~ s$(/\*|\*/)$$g; # uncomment names
  	print "$funcRet $funcName ($funcArgSig) {\n";
