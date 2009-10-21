@@ -31,7 +31,4 @@ int clrHasOpenCL() {
 	return isCL;
 }
 
-void clrExit() {
-	unloadLib();
-}
 
