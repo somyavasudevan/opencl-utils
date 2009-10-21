@@ -1,6 +1,10 @@
 #include "clrun.h"
 #include "dynamiclib.h"
 
+#ifdef _WIN32
+#include <windows.h>
+#endif
+
 int isCL = 0;
 
 // 0 means no opencl, 1 means opencl
@@ -32,3 +36,27 @@ int clrHasOpenCL() {
 }
 
 
+// Windows-specific DLL code
+// Standard crap to make wxWidgets happy
+#ifdef _WIN32
+HINSTANCE g_hInstance;
+
+BOOL APIENTRY DllMain(HINSTANCE hinstDLL,	// DLL module handle
+					  DWORD dwReason,		// reason called
+					  LPVOID lpvReserved)	// reserved
+{
+	switch (dwReason)
+	{
+	case DLL_PROCESS_ATTACH:
+		break; 
+
+	case DLL_PROCESS_DETACH:
+		break;
+	default:
+		break;
+	}
+
+	g_hInstance = hinstDLL;
+	return TRUE;
+}
+#endif

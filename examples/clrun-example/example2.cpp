@@ -1,7 +1,12 @@
 #include <cstdlib>
 #include <cmath>
 #include <cstdio>
-#include <CL/cl.h>
+
+#ifdef _WIN32
+#define WIN32
+#endif
+
+#include "CL/cl.h"
 #include "clrun.h"
 
 const char *VectorAddKernel = "                      \

@@ -15,8 +15,8 @@
 extern "C" {
 #endif
 	
-	EXPORTED int clrInit();
-	EXPORTED int clrHasOpenCL();
+EXPORTED int clrInit();
+EXPORTED int clrHasOpenCL();
 	
 #ifdef __cplusplus
 };
