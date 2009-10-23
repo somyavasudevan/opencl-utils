@@ -1,15 +1,15 @@
 #ifndef __CLRUN_H
 #define __CLRUN_H
 
-#ifdef _WIN32
+/*#ifdef _WIN32
 #ifdef CLRUN_COMPILE
 #define EXPORTED __declspec(dllexport)
 #else
 #define EXPORTED __declspec(dllimport)
 #endif
-#else
+#else*/
 #define EXPORTED
-#endif
+//#endif
 
 #ifdef __cplusplus
 extern "C" {

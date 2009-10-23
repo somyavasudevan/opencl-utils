@@ -26,8 +26,6 @@
 #ifndef __CL_PLATFORM_H
 #define __CL_PLATFORM_H
 
-#include "clrun.h"
-
 #ifdef __APPLE__
     /* Contains #defines for AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER below */
     #include <AvailabilityMacros.h>
@@ -37,7 +35,7 @@
 extern "C" {
 #endif
 
-#define CL_API_ENTRY EXPORTED
+#define CL_API_ENTRY
 #define CL_API_CALL
 #ifdef __APPLE__
 #define CL_API_SUFFIX__VERSION_1_0   AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER
