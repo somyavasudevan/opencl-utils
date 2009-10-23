@@ -2,10 +2,6 @@
 #include <cmath>
 #include <cstdio>
 
-#ifdef _WIN32
-#define WIN32
-#endif
-
 #include "CL/cl.h"
 #include "clrun.h"
 
@@ -97,6 +93,7 @@ int main(int argc, char **argv) {
         }
     }
     printf("Well done! Results are fine!\n");
+	getc(stdin);
   
     // We’re done! Release the objects
     clReleaseMemObject(A);

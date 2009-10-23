@@ -8,15 +8,15 @@
 #define EXPORTED __declspec(dllimport)
 #endif
 #else
-#define EXPORTED extern
+#define EXPORTED
 #endif
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 	
-EXPORTED int clrInit();
-EXPORTED int clrHasOpenCL();
+extern EXPORTED int clrInit();
+extern EXPORTED int clrHasOpenCL();
 	
 #ifdef __cplusplus
 };
